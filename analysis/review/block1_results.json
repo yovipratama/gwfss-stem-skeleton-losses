@@ -1,0 +1,164 @@
+{
+ "len_bias_all20": {
+  "median": -0.36093237396761624,
+  "min": -0.807735913251036,
+  "max": -0.11597346524115912,
+  "n_neg": 20
+ },
+ "area_bias_all20": {
+  "median": -0.3566546170875635,
+  "min": -0.8911225692576195,
+  "max": -0.14134375827150447,
+  "n_neg": 20
+ },
+ "len_bias_under14": -0.45706613851137146,
+ "exclusions_per_institute": {
+  "Arvalis": {
+   "n_test": 110,
+   "n_excluded": 26
+  },
+  "CIMMYT": {
+   "n_test": 108,
+   "n_excluded": 5
+  },
+  "ETHZ": {
+   "n_test": 110,
+   "n_excluded": 44
+  },
+  "INRAE": {
+   "n_test": 110,
+   "n_excluded": 24
+  },
+  "NJAU": {
+   "n_test": 110,
+   "n_excluded": 52
+  },
+  "RRES": {
+   "n_test": 110,
+   "n_excluded": 20
+  },
+  "ULiege": {
+   "n_test": 109,
+   "n_excluded": 18
+  },
+  "UQ": {
+   "n_test": 110,
+   "n_excluded": 53
+  },
+  "USASK": {
+   "n_test": 110,
+   "n_excluded": 0
+  },
+  "UTokyo": {
+   "n_test": 109,
+   "n_excluded": 31
+  }
+ },
+ "skel_decomp_median_over_units": {
+  "base": {
+   "len_bias": -0.361,
+   "len_in_ref_bias": -0.591,
+   "skel_outside_ref": 0.338
+  },
+  "cldice": {
+   "len_bias": -0.409,
+   "len_in_ref_bias": -0.617,
+   "skel_outside_ref": 0.325
+  },
+  "skelrecall": {
+   "len_bias": 0.001,
+   "len_in_ref_bias": -0.442,
+   "skel_outside_ref": 0.476
+  }
+ },
+ "skel_decomp_under": {
+  "base": {
+   "len_bias": -0.457,
+   "len_in_ref_bias": -0.642,
+   "skel_outside_ref": 0.299
+  },
+  "cldice": {
+   "len_bias": -0.461,
+   "len_in_ref_bias": -0.636,
+   "skel_outside_ref": 0.312
+  },
+  "skelrecall": {
+   "len_bias": -0.07,
+   "len_in_ref_bias": -0.451,
+   "skel_outside_ref": 0.44
+  }
+ },
+ "leaf_head_bias_median": {
+  "base": {
+   "head_area_bias_pooled": 0.005,
+   "leaf_area_bias_pooled": 0.042
+  },
+  "cldice": {
+   "head_area_bias_pooled": 0.004,
+   "leaf_area_bias_pooled": 0.01
+  },
+  "skelrecall": {
+   "head_area_bias_pooled": -0.005,
+   "leaf_area_bias_pooled": -0.001
+  }
+ },
+ "base_len_bias": {
+  "median": -0.36093237396761624,
+  "min": -0.807735913251036,
+  "max": -0.11597346524115912,
+  "abs_median": 0.36093237396761624
+ },
+ "base_len_bias_Tval": {
+  "median": -0.042109022415258296,
+  "min": -0.7395969077063353,
+  "max": 1.2541139372897954,
+  "abs_median": 0.09512908934113035
+ },
+ "base_len_bias_T10": {
+  "median": -0.10202866968586352,
+  "min": -0.42430456605523403,
+  "max": 1.1140445126394647,
+  "abs_median": 0.16648761932340683
+ },
+ "cldice_len_bias": {
+  "median": -0.40873760373563883,
+  "abs_median": 0.40873760373563883,
+  "T10_median": -0.3509816114090198,
+  "T10_abs_median": 0.3509816114090198
+ },
+ "skelrecall_len_bias": {
+  "median": 0.0005449929130521697,
+  "abs_median": 0.30168389348917024,
+  "T10_median": 0.07061273461847214,
+  "T10_abs_median": 0.11844418895798574
+ },
+ "random_region_trait_bias": "                  len_bias_median       area_bias_median      \n                              min   max              min   max\nsplit  condition                                              \nrandom base                 -0.26 -0.19            -0.24 -0.15\n       base+thr             -0.13 -0.10            -0.08 -0.04\n       cldice               -0.33 -0.24            -0.10  0.10\n       skelrecall            0.02  0.53             0.03  0.70\nregion base                 -0.72 -0.62            -0.75 -0.61\n       base+thr              0.35  1.76             0.64  1.81\n       cldice               -0.72 -0.52            -0.61 -0.23\n       skelrecall           -0.45 -0.13            -0.49 -0.05",
+ "h1_extras": {
+  "cldice": {
+   "rho_inst10": -0.7818181818181817,
+   "p_inst10": 0.005499450054994501,
+   "p_block20": 0.0014998500149985001,
+   "partial_rho_given_baseIoU": -0.5113235497965622,
+   "rho_without_UTokyo": -0.5727554179566564
+  },
+  "skelrecall": {
+   "rho_inst10": -0.8303030303030302,
+   "p_inst10": 0.001999800019998,
+   "p_block20": 0.0011998800119988001,
+   "partial_rho_given_baseIoU": -0.5605430805762938,
+   "rho_without_UTokyo": -0.6697626418988648
+  }
+ },
+ "h2_margin": {
+  "cldice": {
+   "delta_gt0": 13,
+   "delta_ge1": 6,
+   "meets_H3": 4
+  },
+  "skelrecall": {
+   "delta_gt0": 13,
+   "delta_ge1": 10,
+   "meets_H3": 6
+  }
+ }
+}

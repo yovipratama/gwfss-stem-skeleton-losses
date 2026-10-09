@@ -1,0 +1,30 @@
+{
+ "config": {
+  "split": "random",
+  "backbone": "segformer_b2",
+  "loss": "base",
+  "lam": 1.0,
+  "seed": 0,
+  "scale": 1.0,
+  "iters": 8000,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup": 500,
+  "crop": 512,
+  "skel_iters": 10,
+  "amp": true,
+  "num_workers": 8,
+  "val_every": 1000,
+  "ckpt_every": 500
+ },
+ "env": {
+  "host": "3d424a3c4579",
+  "python": "3.13.15",
+  "torch": "2.11.0+cu130",
+  "smp": "0.5.0",
+  "cuda": "13.0",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "started": "2026-10-07T07:25:44+0000"
+ }
+}

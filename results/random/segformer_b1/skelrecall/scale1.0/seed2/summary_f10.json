@@ -1,0 +1,19 @@
+{
+ "iou_background": 0.832123580631482,
+ "iou_head": 0.8315433168140569,
+ "iou_stem": 0.445569093466695,
+ "iou_leaf": 0.8183161880461461,
+ "miou": 0.731888044739595,
+ "boundary_iou_stem": 0.4453972906921957,
+ "boundary2px_iou_stem": 0.14943719359280036,
+ "cldice_stem": 0.6253303678497197,
+ "skel_recall_stem": 0.7823046722863628,
+ "betti0_err_stem_mean": 11.525114155251142,
+ "subset": "test",
+ "tag": "f10",
+ "scales": [
+  1.0
+ ],
+ "flip": true,
+ "n_images": 219
+}

@@ -1,0 +1,15 @@
+split,scale,loss,metric,n_backbones,n_improves,n_degrades,consistent
+region,1.0,cldice,background_iou,4,0,3,False
+region,1.0,cldice,head_iou,4,0,3,False
+region,1.0,cldice,leaf_iou,4,0,2,False
+region,1.0,cldice,stem_betti0_err,4,0,0,False
+region,1.0,cldice,stem_cldice,4,4,0,True
+region,1.0,cldice,stem_iou,4,4,0,True
+region,1.0,cldice,stem_skel_recall,4,4,0,True
+region,1.0,skelrecall,background_iou,4,0,1,False
+region,1.0,skelrecall,head_iou,4,0,3,False
+region,1.0,skelrecall,leaf_iou,4,0,1,False
+region,1.0,skelrecall,stem_betti0_err,4,0,1,False
+region,1.0,skelrecall,stem_cldice,4,4,0,True
+region,1.0,skelrecall,stem_iou,4,4,0,True
+region,1.0,skelrecall,stem_skel_recall,4,4,0,True

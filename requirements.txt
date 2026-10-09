@@ -1,0 +1,12 @@
+torch>=2.4
+segmentation-models-pytorch==0.5.0
+numpy
+pandas
+scipy
+scikit-image
+opencv-python-headless
+pillow
+pyarrow
+huggingface_hub
+matplotlib
+nbformat

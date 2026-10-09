@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software or the released results, please cite them as below."
+title: "Code and per-image results for: What do skeleton-based losses change in wheat stem segmentation? A cross-backbone and cross-institution study on the GWFSS dataset"
+type: software
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/yovipratama/gwfss-stem-skeleton-losses"
+authors:
+  - given-names: Yovi
+    family-names: Pratama
+    orcid: "https://orcid.org/0000-0001-8001-7627"
+    affiliation: "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa"
+  - given-names: Mohd Yazid
+    family-names: Idris
+    orcid: "https://orcid.org/0000-0001-7702-6610"
+    affiliation: "Universiti Teknologi Malaysia"
+  - given-names: Mohd Kufaisal
+    family-names: Mohd Sidik
+    orcid: "https://orcid.org/0009-0000-5518-2372"
+    affiliation: "Universiti Teknologi Malaysia"
+  - given-names: Afrizal Nehemia
+    family-names: Toscany
+    orcid: "https://orcid.org/0009-0008-6572-1462"
+    affiliation: "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa"
+  - given-names: Errissya
+    family-names: Rasywir
+    orcid: "https://orcid.org/0000-0003-1550-4669"
+    affiliation: "Universitas Dinamika Bangsa"
+keywords: [wheat, organ segmentation, stem, clDice, Skeleton Recall, domain shift, threshold calibration, GWFSS]
+references:
+  - type: dataset
+    title: "The Global Wheat Full Semantic Organ Segmentation (GWFSS) dataset"
+    authors: [{family-names: Wang, given-names: Zijian}]
+    doi: "10.1016/j.plaphe.2025.100084"
+    url: "https://huggingface.co/datasets/GlobalWheat/GWFSS_v1.0"

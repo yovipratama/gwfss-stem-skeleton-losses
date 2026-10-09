@@ -1,0 +1,111 @@
+{
+ "matched_area": {
+  "cldice": {
+   "units": 24,
+   "iou_loss_minus_base_mean": 0.045568800677385335,
+   "iou_loss_higher": 10,
+   "cc_loss_minus_base_median": -9.263844870725606,
+   "cc_loss_lower": 24,
+   "betti_loss_minus_base_mean": -3.1661863924669738,
+   "betti_loss_lower": 21,
+   "area_match_range": [
+    0.93,
+    1.09
+   ]
+  },
+  "skelrecall": {
+   "units": 24,
+   "iou_loss_minus_base_mean": 0.8229193190102068,
+   "iou_loss_higher": 16,
+   "cc_loss_minus_base_median": -3.211363636363636,
+   "cc_loss_lower": 24,
+   "betti_loss_minus_base_mean": -3.1484447559179976,
+   "betti_loss_lower": 24,
+   "area_match_range": [
+    0.92,
+    1.06
+   ]
+  }
+ },
+ "seed_two_level_changes": 1,
+ "boundary2px": {
+  "random/cldice": {
+   "improves": 0,
+   "degrades": 4
+  },
+  "random/skelrecall": {
+   "improves": 0,
+   "degrades": 4
+  },
+  "region/cldice": {
+   "improves": 0,
+   "degrades": 0
+  },
+  "region/skelrecall": {
+   "improves": 3,
+   "degrades": 0
+  }
+ },
+ "n_per_test_stem_iou": {
+  "random/deeplabv3plus_r101/cldice": 174,
+  "random/deeplabv3plus_r101/skelrecall": 176,
+  "random/segformer_b1/cldice": 170,
+  "random/segformer_b1/skelrecall": 172,
+  "random/segformer_b2/cldice": 170,
+  "random/segformer_b2/skelrecall": 171,
+  "random/upernet_convnext_t/cldice": 180,
+  "random/upernet_convnext_t/skelrecall": 183,
+  "region/deeplabv3plus_r101/cldice": 81,
+  "region/deeplabv3plus_r101/skelrecall": 97,
+  "region/segformer_b1/cldice": 77,
+  "region/segformer_b1/skelrecall": 84,
+  "region/segformer_b2/cldice": 83,
+  "region/segformer_b2/skelrecall": 87,
+  "region/upernet_convnext_t/cldice": 86,
+  "region/upernet_convnext_t/skelrecall": 91
+ },
+ "x2_vs_x1_baseline": [
+  {
+   "backbone": "segformer_b1",
+   "n": 168,
+   "mean_diff": 2.2321,
+   "ci_low": 1.3153,
+   "ci_high": 3.1711,
+   "p": 0.0
+  },
+  {
+   "backbone": "deeplabv3plus_r101",
+   "n": 175,
+   "mean_diff": 5.0963,
+   "ci_low": 3.9801,
+   "ci_high": 6.1242,
+   "p": 0.0
+  }
+ ],
+ "cldice_moderator_random": [
+  {
+   "backbone": "deeplabv3plus_r101",
+   "rho_delta_vs_stem_px": 0.00437424824349904
+  },
+  {
+   "backbone": "segformer_b1",
+   "rho_delta_vs_stem_px": -0.06726586658987728
+  },
+  {
+   "backbone": "segformer_b2",
+   "rho_delta_vs_stem_px": -0.2546190955566048
+  },
+  {
+   "backbone": "upernet_convnext_t",
+   "rho_delta_vs_stem_px": 0.030415835126346536
+  }
+ ],
+ "radius_all": {
+  "median": 4.242640687119285,
+  "p90": 11.661903789690601,
+  "frac_gt10_native": 0.13104212643356095,
+  "frac_gt10_at_x2": 0.37263200591348067,
+  "frac_gt40_at_x2": 0.009258048533593783
+ },
+ "rho_A_vs_median_radius": -0.03136661633374337
+}
