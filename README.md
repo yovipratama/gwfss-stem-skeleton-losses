@@ -2,7 +2,7 @@
 
 Code, data splits, experiment specifications and per-image results for:
 
-> Pratama, Y., Idris, M.Y., Mohd Sidik, M.K., Toscany, A.N., Rasywir, E. *What do skeleton-based losses change in wheat stem segmentation? A cross-backbone and cross-institution study on the GWFSS dataset.* (manuscript submitted)
+> Pratama, Y., Idris, M.Y., Mohd Sidik, M.K., Toscany, A.N., Rasywir, E. *Skeleton-based losses versus threshold calibration for wheat stem segmentation across ten institutions.* (manuscript submitted)
 
 The study compares two skeleton-based connectivity losses, **clDice** and **Skeleton Recall**, added to the stem channel of a cross-entropy + Dice objective, on the [GWFSS v1.0](https://huggingface.co/datasets/GlobalWheat/GWFSS_v1.0) wheat organ segmentation dataset: four architectures (DeepLabV3+ R101, SegFormer-B1/B2, UPerNet ConvNeXt-T), three seeds, a random split, a held-out institution, doubled resolution, a leave-one-institution-out (LOIO) experiment, decision-threshold calibration and image-derived stem traits.
 

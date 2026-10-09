@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or the released results, please cite them as below."
-title: "Code and per-image results for: What do skeleton-based losses change in wheat stem segmentation? A cross-backbone and cross-institution study on the GWFSS dataset"
+title: "Code and per-image results for: Skeleton-based losses versus threshold calibration for wheat stem segmentation across ten institutions"
 type: software
 version: 1.0.0
 license: MIT
