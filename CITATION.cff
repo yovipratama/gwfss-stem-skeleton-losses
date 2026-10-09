@@ -1,8 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this software or the released results, please cite them as below."
 title: "Code and per-image results for: Skeleton-based losses versus threshold calibration for wheat stem segmentation across ten institutions"
+doi: "10.5281/zenodo.23257262"
 type: software
-version: 1.0.0
+version: 1.0.1
 license: MIT
 repository-code: "https://github.com/yovipratama/gwfss-stem-skeleton-losses"
 authors:

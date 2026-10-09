@@ -1,4 +1,6 @@
-# What do skeleton-based losses change in wheat stem segmentation?
+# Skeleton-based losses versus threshold calibration for wheat stem segmentation
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23257262.svg)](https://doi.org/10.5281/zenodo.23257262)
 
 Code, data splits, experiment specifications and per-image results for:
 
@@ -46,4 +48,4 @@ Hardware differed between experiments (Colab T4, A100 and RTX PRO 6000; see each
 
 ## Citation
 
-See `CITATION.cff`. A DOI will be added when the repository is archived on Zenodo.
+See `CITATION.cff`. Archived on Zenodo: https://doi.org/10.5281/zenodo.23257262 (all versions).

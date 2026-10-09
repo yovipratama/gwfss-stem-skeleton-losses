@@ -3,18 +3,56 @@
   "upload_type": "software",
   "description": "<p>Training, evaluation and analysis code, data splits, experiment specifications and per-image result tables for a controlled study of two skeleton-based connectivity losses (clDice and Skeleton Recall) for wheat stem segmentation on the GWFSS v1.0 dataset: four architectures, three seeds, random and cross-institution splits, doubled resolution, a leave-one-institution-out experiment, decision-threshold calibration and image-derived stem traits. Model weights and the GWFSS images are not included; the dataset is available from the Hugging Face Hub (GlobalWheat/GWFSS_v1.0, CC BY 4.0). Code: MIT licence; result tables and specifications: CC BY 4.0.</p>",
   "creators": [
-    {"name": "Pratama, Yovi", "affiliation": "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa", "orcid": "0000-0001-8001-7627"},
-    {"name": "Idris, Mohd Yazid", "affiliation": "Universiti Teknologi Malaysia", "orcid": "0000-0001-7702-6610"},
-    {"name": "Mohd Sidik, Mohd Kufaisal", "affiliation": "Universiti Teknologi Malaysia", "orcid": "0009-0000-5518-2372"},
-    {"name": "Toscany, Afrizal Nehemia", "affiliation": "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa", "orcid": "0009-0008-6572-1462"},
-    {"name": "Rasywir, Errissya", "affiliation": "Universitas Dinamika Bangsa", "orcid": "0000-0003-1550-4669"}
+    {
+      "name": "Pratama, Yovi",
+      "affiliation": "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa",
+      "orcid": "0000-0001-8001-7627"
+    },
+    {
+      "name": "Idris, Mohd Yazid",
+      "affiliation": "Universiti Teknologi Malaysia",
+      "orcid": "0000-0001-7702-6610"
+    },
+    {
+      "name": "Mohd Sidik, Mohd Kufaisal",
+      "affiliation": "Universiti Teknologi Malaysia",
+      "orcid": "0009-0000-5518-2372"
+    },
+    {
+      "name": "Toscany, Afrizal Nehemia",
+      "affiliation": "Universiti Teknologi Malaysia; Universitas Dinamika Bangsa",
+      "orcid": "0009-0008-6572-1462"
+    },
+    {
+      "name": "Rasywir, Errissya",
+      "affiliation": "Universitas Dinamika Bangsa",
+      "orcid": "0000-0003-1550-4669"
+    }
   ],
   "license": "MIT",
-  "keywords": ["wheat", "organ segmentation", "stem", "clDice", "Skeleton Recall", "topology-preserving loss", "domain shift", "threshold calibration", "GWFSS"],
-  "related_identifiers": [
-    {"identifier": "10.1016/j.plaphe.2025.100084", "relation": "references", "scheme": "doi"},
-    {"identifier": "https://huggingface.co/datasets/GlobalWheat/GWFSS_v1.0", "relation": "isDerivedFrom", "scheme": "url"}
+  "keywords": [
+    "wheat",
+    "organ segmentation",
+    "stem",
+    "clDice",
+    "Skeleton Recall",
+    "topology-preserving loss",
+    "domain shift",
+    "threshold calibration",
+    "GWFSS"
   ],
-  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "10.1016/j.plaphe.2025.100084",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/GlobalWheat/GWFSS_v1.0",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ],
+  "version": "1.0.1",
   "language": "eng"
 }
