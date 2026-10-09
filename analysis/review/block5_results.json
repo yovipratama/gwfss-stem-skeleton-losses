@@ -1,0 +1,160 @@
+{
+ "two_level_marked_total": 75,
+ "two_level_marked_losing_excl0": [
+  {
+   "split": "random",
+   "backbone": "upernet_convnext_t",
+   "loss": "cldice",
+   "metric": "head_iou"
+  },
+  {
+   "split": "region",
+   "backbone": "deeplabv3plus_r101",
+   "loss": "skelrecall",
+   "metric": "stem_betti0_err"
+  },
+  {
+   "split": "region",
+   "backbone": "segformer_b1",
+   "loss": "cldice",
+   "metric": "leaf_iou"
+  },
+  {
+   "split": "region",
+   "backbone": "segformer_b2",
+   "loss": "skelrecall",
+   "metric": "head_iou"
+  },
+  {
+   "split": "region",
+   "backbone": "segformer_b2",
+   "loss": "skelrecall",
+   "metric": "background_iou"
+  }
+ ],
+ "calibration_traits": {
+  "LOIO": {
+   "none": {
+    "bias_median": -0.36093237396761624,
+    "abs_median": 0.3997001138644894,
+    "ccc_median": 0.6320645243404592
+   },
+   "Tval": {
+    "bias_median": -0.042109022415258296,
+    "abs_median": 0.3724306746712407,
+    "ccc_median": 0.7972649087079606
+   },
+   "T5": {
+    "bias_median": -0.023086962695159828,
+    "abs_median": 0.4300962674357941,
+    "ccc_median": 0.6837322139736478
+   },
+   "T10": {
+    "bias_median": -0.10202866968586355,
+    "abs_median": 0.38705843367713566,
+    "ccc_median": 0.7272805017511904
+   },
+   "T10_gain_range": [
+    -0.3811215687645557,
+    10.636576412482228
+   ],
+   "T5_gain_range": [
+    -1.2248924388681885,
+    10.548397541801787
+   ]
+  },
+  "region": {
+   "none": {
+    "bias_median": -0.6758499130851381,
+    "abs_median": 0.6809986245435735,
+    "ccc_median": 0.42797009104014155
+   },
+   "T5": {
+    "bias_median": -0.28434093940632665,
+    "abs_median": 0.5320140837428882,
+    "ccc_median": 0.6414187735908676
+   },
+   "T10": {
+    "bias_median": -0.349951650645557,
+    "abs_median": 0.46658018302992055,
+    "ccc_median": 0.7013899678217634
+   },
+   "T10_gain_range": [
+    4.912055006365204,
+    7.91766477447479
+   ],
+   "T5_gain_range": [
+    2.922051252654672,
+    6.710329140391369
+   ]
+  }
+ },
+ "loss_traits_LOIO_all20": {
+  "base": {
+   "len_bias": -0.361,
+   "len_abs": 0.399,
+   "len_ccc": 0.632
+  },
+  "cldice": {
+   "len_bias": -0.409,
+   "len_abs": 0.436,
+   "len_ccc": 0.631
+  },
+  "skelrecall": {
+   "len_bias": 0.001,
+   "len_abs": 0.431,
+   "len_ccc": 0.719
+  }
+ },
+ "Tval_gain_range": [
+  -0.11217717102685754,
+  7.882005499548541
+ ],
+ "season_bias_base": {
+  "early_median": -0.6147853881278539,
+  "late_median": -0.31161917892156865,
+  "neg_units": 24,
+  "n": 24,
+  "max_abs_half_diff": 0.7566904120138622
+ },
+ "dates": {
+  "ETHZ": [
+   "2020-11-25",
+   "2022-07-18",
+   85
+  ],
+  "INRAE": [
+   "2021-05-03",
+   "2023-06-23",
+   110
+  ],
+  "NJAU": [
+   "2022-02-26",
+   "2023-05-18",
+   110
+  ],
+  "RRES": [
+   "2019-01-03",
+   "2021-08-04",
+   110
+  ],
+  "ULiege": [
+   "2018-04-09",
+   "2022-07-25",
+   109
+  ],
+  "UTokyo": [
+   "2015-02-19",
+   "2015-06-02",
+   109
+  ]
+ },
+ "rres_stage_counts": {
+  "maturity": 19,
+  "booting": 19,
+  "flowering": 15,
+  "heading": 13,
+  "jointing": 6,
+  "tillering": 5
+ }
+}
