@@ -152,9 +152,12 @@
  "rres_stage_counts": {
   "maturity": 19,
   "booting": 19,
+  "earlyscen": 16,
   "flowering": 15,
   "heading": 13,
+  "lateScen": 11,
   "jointing": 6,
+  "earlyJointing": 6,
   "tillering": 5
  }
 }

@@ -98,6 +98,6 @@ res["season_bias_base"] = dict(early_median=float(p.xs("early", level="half").ba
 # ---- REV-34: acquisition dates per institution
 man = pd.read_csv("data_cache/gw/manifest.csv"); man["dt"] = man.name.map(parse)
 res["dates"] = {i: [str(min(g.dt.dropna())), str(max(g.dt.dropna())), int(g.dt.notna().sum())] for i, g in man.groupby("institute") if g.dt.notna().any()}
-res["rres_stage_counts"] = man[man.institute == "RRES"].name.str.extract(r"_(tillering|booting|heading|flowering|anthesis|grainfill\w*|maturity|stem\w*|jointing|milk\w*|dough\w*|senescence)_", flags=re.I)[0].value_counts().to_dict()
+res["rres_stage_counts"] = man[man.institute == "RRES"].name.str.extract(r"_\d{2}-\d{2}-\d{2}_([A-Za-z]+)_")[0].value_counts().to_dict()
 json.dump(res, open(f"{OUT}/block5_results.json", "w"), indent=1, default=float)
 print(json.dumps(res, indent=1, default=lambda v: round(float(v), 3)))

@@ -29,7 +29,7 @@ for inst in ["ETHZ", "INRAE", "NJAU", "RRES", "ULiege", "UTokyo"]:
     for bb in ["segformer_b2", "upernet_convnext_t"]:
         sw = pd.read_csv(f"results/loio_{inst}/{bb}/base/scale1.0/seed0/sweep_test.csv")
         names = sorted(sw.name.unique()); dts = {n: parse(n) for n in names}; names = [n for n in names if dts[n]]
-        # season position: day of year within each year's campaign, split at the median (early vs late in season)
+        # season position: days since 1 September of the growing season, split at the median (early vs late in season)
         doy = {n: season_day(dts[n]) for n in names}; med = np.median(list(doy.values()))  # days since 1 September of the season
         half = {"early": [n for n in names if doy[n] <= med], "late": [n for n in names if doy[n] > med]}
         for ev, other in [("early", "late"), ("late", "early")]:
