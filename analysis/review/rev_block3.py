@@ -15,6 +15,9 @@ def parse(n):
     g = [int(x) for x in m.groups()]
     y, mo, d = (g[2], g[0], g[1]) if i == "RRES" else g
     return date(y, mo, d)
+def season_day(d):
+    start = date(d.year if d.month >= 9 else d.year - 1, 9, 1)
+    return (d - start).days
 def best_offset(sw, names):
     s = sw[sw.name.isin(names)].groupby("offset")[["inter_stem", "union_stem"]].sum()
     iou = (s.inter_stem / s.union_stem.replace(0, np.nan)).fillna(0).round(6); top = iou[iou == iou.max()].index
@@ -27,7 +30,7 @@ for inst in ["ETHZ", "INRAE", "NJAU", "RRES", "ULiege", "UTokyo"]:
         sw = pd.read_csv(f"results/loio_{inst}/{bb}/base/scale1.0/seed0/sweep_test.csv")
         names = sorted(sw.name.unique()); dts = {n: parse(n) for n in names}; names = [n for n in names if dts[n]]
         # season position: day of year within each year's campaign, split at the median (early vs late in season)
-        doy = {n: (dts[n] - date(dts[n].year, 1, 1)).days for n in names}; med = np.median(list(doy.values()))
+        doy = {n: season_day(dts[n]) for n in names}; med = np.median(list(doy.values()))  # days since 1 September of the season
         half = {"early": [n for n in names if doy[n] <= med], "late": [n for n in names if doy[n] > med]}
         for ev, other in [("early", "late"), ("late", "early")]:
             E, O = half[ev], half[other]

@@ -111,8 +111,8 @@
   7.882005499548541
  ],
  "season_bias_base": {
-  "early_median": -0.6147853881278539,
-  "late_median": -0.31161917892156865,
+  "early_median": -0.7453445280050518,
+  "late_median": -0.2933946960078996,
   "neg_units": 24,
   "n": 24,
   "max_abs_half_diff": 0.7566904120138622

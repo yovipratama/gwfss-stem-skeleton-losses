@@ -87,7 +87,7 @@ for inst in ["ETHZ", "INRAE", "NJAU", "RRES", "ULiege", "UTokyo"]:
         for l in ["base", "cldice", "skelrecall"]:
             d = pd.read_csv(f"results/loio_{inst}/{b}/{l}/scale1.0/seed0/metrics_ss.csv")
             d["dt"] = d.name.map(parse); d = d[d.dt.notna()]
-            doy = d.dt.map(lambda x: (x - date(x.year, 1, 1)).days); med = doy.median(); d["half"] = np.where(doy <= med, "early", "late")
+            doy = d.dt.map(lambda x: (x - date(x.year if x.month >= 9 else x.year - 1, 9, 1)).days); med = doy.median(); d["half"] = np.where(doy <= med, "early", "late")  # season day counted from 1 September
             for h, x in d[d.gt_stem_px >= 500].groupby("half"):
                 e = (x.skel_pred_px - x.skel_gt_px) / x.skel_gt_px
                 rows.append(dict(institute=inst, backbone=b, loss=l, half=h, n=len(x), len_bias=e.median(), area_ratio=x.pred_stem_px.sum() / x.gt_stem_px.sum()))
