@@ -1,0 +1,30 @@
+{
+ "config": {
+  "split": "loio_NJAU",
+  "backbone": "segformer_b2",
+  "loss": "base",
+  "lam": 1.0,
+  "seed": 1,
+  "scale": 1.0,
+  "iters": 8000,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup": 500,
+  "crop": 512,
+  "skel_iters": 10,
+  "amp": true,
+  "num_workers": 2,
+  "val_every": 1000,
+  "ckpt_every": 500
+ },
+ "env": {
+  "host": "3540c80b2b5c",
+  "python": "3.13.15",
+  "torch": "2.11.0+cu130",
+  "smp": "0.5.0",
+  "cuda": "13.0",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "started": "2026-10-09T00:40:51+0000"
+ }
+}

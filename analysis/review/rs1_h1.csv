@@ -1,0 +1,5 @@
+loss,variant,rho,p_one_sided
+cldice,"A from seed 1, delta seed-0 vs seed-0",-0.5729323308270676,0.004399560043995601
+cldice,"A from seed 1, delta seed-0 loss vs seed-1 base",-0.3984962406015037,0.0453954604539546
+skelrecall,"A from seed 1, delta seed-0 vs seed-0",-0.5353383458646617,0.0082991700829917
+skelrecall,"A from seed 1, delta seed-0 loss vs seed-1 base",-0.5488721804511278,0.006799320067993201

@@ -1,0 +1,21 @@
+{
+ "seed_spread": {
+  "A_abs_diff_median": 0.031956700279555494,
+  "A_abs_diff_max": 0.11686590666269919,
+  "A_rank_rho": 0.9684210526315788,
+  "iou_abs_diff_median": 0.5559898102736902,
+  "iou_abs_diff_max": 6.562490814700563,
+  "under07_seed0": 14,
+  "under07_seed1": 14
+ },
+ "seed_spread_by_backbone": {
+  "dA": {
+   "segformer_b2": 0.059,
+   "upernet_convnext_t": 0.022
+  },
+  "dIoU": {
+   "segformer_b2": 0.728,
+   "upernet_convnext_t": 0.273
+  }
+ }
+}
