@@ -25,7 +25,7 @@ for l, name, col in LOSS:
         d = U[U.backbone == b]
         ax[0].scatter(d.area_ratio_base, d[f"delta_{l}"], marker=mk, s=22, facecolor=col, edgecolor="white", linewidth=0.8, zorder=3)
     r = H1[(H1.loss == l) & (H1.scope == "all 20")].iloc[0]
-    ax[0].text(0.93, 9.8 - (0 if l == "cldice" else 1.1), f"{name}: ρ = {r.rho:.2f}, p = {r.p_one_sided:.3f}", ha="right", va="top", fontsize=6.5, color=TXT)
+    ax[0].text(0.93, 9.8 - (0 if l == "cldice" else 1.1), f"{name}: ρ = {r.rho:.2f}, p = {r.p_one_sided:.3f}".replace("-", "−"), ha="right", va="top", fontsize=6.5, color=TXT)
 ax[0].set_ylabel("Change in stem IoU vs baseline\n(mean per image, percentage points)")
 ax[0].text(0.17, -3.3, "under-segmented\n(ratio < 0.7)", fontsize=6, color=MUTED, va="bottom")
 # (b)
@@ -37,11 +37,15 @@ for l, name, col in [("base", "Baseline", BASEC)] + LOSS:
 ax[1].set_ylabel("Visible stem-class skeleton length:\nmedian signed relative error (%)")
 for a, t in zip(ax, "ab"):
     a.annotate(f"({t})", xy=(0, 1), xycoords="axes fraction", xytext=(-30, 6), textcoords="offset points", fontsize=8, fontweight="bold", color=TXT)
-h = [Line2D([], [], lw=0, marker="o", ms=5, mfc=c, mec="white", label=n) for _, n, c in LOSS]
-h += [Line2D([], [], lw=0, marker="o", ms=5, mfc="white", mec=BASEC, label="Baseline (b)"),
-      Line2D([], [], lw=0, marker="o", ms=5, mfc=MUTED, mec=MUTED, label="SegFormer-B2"),
+# Two legends: colour/fill = condition, marker shape = architecture (readable in greyscale).
+from matplotlib.patches import Patch
+hc = [Patch(facecolor=c, edgecolor="white", label=n) for _, n, c in LOSS]
+hc += [Patch(facecolor="white", edgecolor=BASEC, linewidth=0.9, label="Baseline (open, panel b)")]
+ha = [Line2D([], [], lw=0, marker="o", ms=5, mfc=MUTED, mec=MUTED, label="SegFormer-B2"),
       Line2D([], [], lw=0, marker="s", ms=5, mfc=MUTED, mec=MUTED, label="UPerNet (ConvNeXt-T)")]
-fig.legend(handles=h, loc="lower center", ncol=5, frameon=False, fontsize=7, bbox_to_anchor=(0.5, -0.1))
+kw = dict(frameon=False, fontsize=7, title_fontsize=7, handlelength=1.2, columnspacing=1.2)
+fig.legend(handles=hc, title="Condition", loc="upper right", ncol=3, bbox_to_anchor=(0.62, -0.01), **kw)
+fig.legend(handles=ha, title="Architecture", loc="upper left", ncol=2, bbox_to_anchor=(0.66, -0.01), **kw)
 for ext in ("pdf", "png"):
     fig.savefig(f"{P}/figures/fig3_loio_area_ratio.{ext}", dpi=600, bbox_inches="tight")
 print("ok")

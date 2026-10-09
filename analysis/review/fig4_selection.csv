@@ -1,0 +1,5 @@
+split,backbone,name,unit_median_delta,image_delta,n_eligible,offset,offset_source,base_iou,cldice_iou,skelrecall_iou
+random,segformer_b2,INRAE_phenomobile_nadir_2023_FFAST_Toulouse_2023-06-23_uplot_23ZM8_Y01X012_camera_1_2_RGB_WB.png,-0.49,-0.49,159,0.5,validation set,43.8,40.7,45.9
+loio_USASK,segformer_b2,USASK_159-compressed_001.png,8.88,9.12,110,3.5,lower median of 20 ten-image draws,22.3,32.9,30.0
+loio_UTokyo,segformer_b2,UTokyo_20150521_EOS12_IMG_1103.png,4.89,4.91,78,5.0,lower median of 20 ten-image draws,0.0,6.4,3.5
+loio_UQ,upernet_convnext_t,UQ_new_4c3f721162134e1c7d7723acba72643ac50c504e.png,2.26,2.26,57,2.5,lower median of 20 ten-image draws,47.3,49.7,49.5
