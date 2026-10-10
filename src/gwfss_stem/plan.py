@@ -49,3 +49,15 @@ def revision_plan():
     runs += [dict(sq="R-S1", split=f"loio_{i}", backbone=b, loss="base", seed=1, scale=1.0)
              for b in LOIO_BACKBONES for i in LOIO_INSTITUTES]
     return runs
+
+
+# Review controls (added in review; specification specifications/03_spec_recall_control_topology.md)
+LAMBDA_FOLDS = ["UTokyo", "USASK", "INRAE", "NJAU"]   # two lowest and two highest seed-0 SegFormer-B2 area ratios
+
+
+def review_plan():
+    runs = [dict(sq="R-TV", split=f"loio_{i}", backbone=b, loss="tversky", seed=0, scale=1.0)
+            for b in LOIO_BACKBONES for i in LOIO_INSTITUTES]
+    runs += [dict(sq="R-LAM", split=f"loio_{i}", backbone="segformer_b2", loss=l, seed=0, scale=1.0, lam=lam)
+             for i in LAMBDA_FOLDS for l in ["cldice", "skelrecall"] for lam in [0.25, 0.5]]
+    return runs

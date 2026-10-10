@@ -31,6 +31,8 @@ def run_name(cfg):
     loss = cfg["loss"]
     if cfg.get("skel_iters", DEFAULTS["skel_iters"]) != DEFAULTS["skel_iters"]:
         loss += f"_k{cfg['skel_iters']}"  # non-default soft-skeleton depth (revision run R-K40)
+    if cfg.get("lam", DEFAULTS["lam"]) != DEFAULTS["lam"]:
+        loss += f"_lam{cfg['lam']}"  # non-default loss weight (review block C, specifications/03)
     return f"{cfg['split']}/{cfg['backbone']}/{loss}/scale{cfg['scale']}/seed{cfg['seed']}"
 
 
@@ -397,4 +399,57 @@ def offset_sweep(run_dir, data_root, split_file, subset="test", device="cuda", o
     df = pd.DataFrame(rows)
     df.to_csv(out_csv, index=False)
     log(f"[sweep] {run_dir} {subset}: {df.name.nunique()} images x {len(offsets)} offsets")
+    return df
+
+
+def topo_counts(p, G, n_ref):
+    """p: boolean stem prediction; G, n_ref: labelled reference components (8-connected)."""
+    from scipy import ndimage
+    from .metrics import EIGHT
+    P, n_pred = ndimage.label(p, structure=EIGHT)
+    both = (P > 0) & (G > 0)
+    pairs = np.unique(np.stack([P[both], G[both]], 1), axis=0) if both.any() else np.zeros((0, 2), int)
+    dp = np.bincount(pairs[:, 0], minlength=n_pred + 1)[1:]   # links per predicted component
+    dg = np.bincount(pairs[:, 1], minlength=n_ref + 1)[1:]    # links per reference component
+    return dict(n_pred=int(n_pred), n_ref=int(n_ref), pred_stem_px=int(p.sum()),
+                merges=int((dp >= 2).sum()), excess_merge=int(np.clip(dp - 1, 0, None).sum()),
+                splits=int((dg >= 2).sum()), excess_split=int(np.clip(dg - 1, 0, None).sum()),
+                spurious=int((dp == 0).sum()), missed=int((dg == 0).sum()))
+
+
+@torch.no_grad()
+def topology_sweep(run_dir, data_root, split_file, subset="test", device="cuda", offsets=OFFSETS, log=print):
+    """Spatial topology of the stem prediction per image and stem-logit offset (review block B, specifications/03).
+    Predicted (P) and reference (G) 8-connected stem components are linked if they share a pixel.
+    Writes topo_{subset}.csv: n_pred, n_ref, merges / excess_merge (P linked to >= 2 G), splits / excess_split
+    (G linked to >= 2 P), spurious (P without link), missed (G without link), pred_stem_px."""
+    from scipy import ndimage
+    from .data import STEM, IGNORE
+    from .metrics import EIGHT
+    out_csv = os.path.join(run_dir, f"topo_{subset}.csv")
+    if os.path.exists(out_csv):
+        log(f"[skip] {run_dir} topo_{subset}")
+        return pd.read_csv(out_csv)
+    with open(os.path.join(run_dir, "config.json")) as f:
+        cfg = json.load(f)["config"]
+    assert cfg["scale"] == 1.0, "topology sweep is defined for native-resolution runs"
+    model = build_model(cfg["backbone"], pretrained=False).to(device)
+    model.load_state_dict(torch.load(os.path.join(run_dir, "final.pt"), map_location=device))
+    model.eval()
+    split = load_split(split_file, cfg["split"])
+    ds = SegDataset(data_root, split[subset], train=False, scale=1.0)
+    rows = []
+    for i in range(len(ds)):
+        it = ds[i]
+        lg = _native_logits(model, it["image"][None].to(device))
+        gt = it["mask"].numpy().astype(np.uint8)
+        valid = gt != IGNORE
+        G, n_ref = ndimage.label((gt == STEM) & valid, structure=EIGHT)
+        for b in offsets:
+            l2 = lg.clone(); l2[:, STEM] += b
+            p = (l2.argmax(1)[0] == STEM).cpu().numpy() & valid
+            rows.append(dict(name=it["name"], offset=b, **topo_counts(p, G, n_ref)))
+    df = pd.DataFrame(rows)
+    df.to_csv(out_csv, index=False)
+    log(f"[topo] {run_dir} {subset}: {df.name.nunique()} images x {len(offsets)} offsets")
     return df

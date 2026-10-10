@@ -1,4 +1,4 @@
-"""Loss functions: CE + Dice baseline, clDice and Skeleton Recall on the stem channel."""
+"""Loss functions: CE + Dice baseline, clDice, Skeleton Recall and a recall-weighted Tversky control on the stem channel."""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -30,13 +30,15 @@ def soft_skel(x, iters):
 class SegLoss(nn.Module):
     """total = CE + Dice + lam * connectivity term (stem channel only).
 
-    kind: 'base' | 'cldice' | 'skelrecall'
+    kind: 'base' | 'cldice' | 'skelrecall' | 'tversky'
+    'tversky' (review control, specifications/03): recall-weighted overlap without a skeleton term.
     """
 
-    def __init__(self, kind="base", lam=1.0, skel_iters=10, smooth=1.0):
+    def __init__(self, kind="base", lam=1.0, skel_iters=10, smooth=1.0, alpha=0.3, beta=0.7):
         super().__init__()
-        assert kind in ("base", "cldice", "skelrecall")
+        assert kind in ("base", "cldice", "skelrecall", "tversky")
         self.kind, self.lam, self.skel_iters, self.smooth = kind, lam, skel_iters, smooth
+        self.alpha, self.beta = alpha, beta
         self.ce = nn.CrossEntropyLoss(ignore_index=IGNORE)
         self.dice = DiceLoss(mode="multiclass", ignore_index=IGNORE)
 
@@ -55,6 +57,10 @@ class SegLoss(nn.Module):
             tprec = ((sp * y).sum() + s) / (sp.sum() + s)
             tsens = ((sy * p).sum() + s) / (sy.sum() + s)
             conn = 1.0 - 2.0 * tprec * tsens / (tprec + tsens)
+        elif self.kind == "tversky":
+            yv = y * valid
+            tp, fp, fn = (p * yv).sum(), (p * (1 - yv)).sum(), ((1 - p) * yv).sum()
+            conn = 1.0 - (tp + s) / (tp + self.alpha * fp + self.beta * fn + s)
         else:
             sk = skeleton.unsqueeze(1).to(p.dtype)
             if sk.sum() == 0:
