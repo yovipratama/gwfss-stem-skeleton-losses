@@ -48,9 +48,9 @@ arrow(23, 60, 23, 56.4)
 X0, X1 = 50, 120
 box(X0, 2, X1 - X0, TOP - 2, ORANGE_BG, ORANGE, lw=1.2)
 title(X0 + 2.5, TOP - 2.5, "Training (Sections 3.3–3.5)", ORANGE)
-ax.text((X0 + X1) / 2, TOP - 9, r"$\mathcal{L}=\mathcal{L}_{\mathrm{CE}}+\mathcal{L}_{\mathrm{Dice}}+\lambda\,\mathcal{L}_{\mathrm{conn}}$   Eq. (1)",
+ax.text((X0 + X1) / 2, TOP - 9, r"$\mathcal{L}=\mathcal{L}_{\mathrm{CE}}+\mathcal{L}_{\mathrm{Dice}}+\lambda\,\mathcal{L}_{\mathrm{aux}}$   Eq. (1)",
         fontsize=7.6, ha="center", va="top")
-body(X0 + 2.5, TOP - 16, r"$\mathcal{L}_{\mathrm{conn}}$ acts on the stem probability only:")
+body(X0 + 2.5, TOP - 16, r"$\mathcal{L}_{\mathrm{aux}}$ acts on the stem probability only:")
 rows = [("none", "baseline"), ("clDice", "soft skeletons, Eqs. (2)–(3)"), ("Skeleton Recall", "reference skeleton tube, Eq. (4)"),
         ("Tversky control", "recall-weighted, no skeleton, Eq. (5)")]
 for i, (a, b) in enumerate(rows):
