@@ -13,12 +13,12 @@ The study compares two skeleton-based connectivity losses, **clDice** and **Skel
 | Folder | Content |
 |---|---|
 | `src/gwfss_stem/` | Dataset preparation and splits (`data.py`), models (`models.py`), losses (`losses.py`, including the Tversky control), metrics (`metrics.py`), training/evaluation/threshold and topology sweeps (`engine.py`), statistics (`analysis.py`), run plans (`plan.py`) |
-| `notebooks/` | Google Colab notebooks used to run everything (00 setup and data audit → 01 training → 02 evaluation → 03 analysis → 04 threshold control → 05a–c LOIO → 06a–b revision runs → 07 qualitative predictions for Fig. 4 → 08a–c review runs: Tversky control, loss weights, topology sweeps) |
+| `notebooks/` | Google Colab notebooks used to run everything (00 setup and data audit → 01 training → 02 evaluation → 03 analysis → 04 threshold control → 05a–c LOIO → 06a–b revision runs → 07 qualitative predictions for Fig. 8 → 08a–c review runs: Tversky control, loss weights, topology sweeps) |
 | `splits/splits.json` | All splits: `random`, `region`, `loio_<institution>` |
 | `specifications/` | Time-stamped specifications written before the LOIO, revision and review runs, with SHA-256 hashes, errata and deviations |
 | `results/` | One folder per run (`<split>/<architecture>/<loss>/scale<s>/seed<n>/`): `config.json` (settings, library and GPU versions), `train_log.csv`, `metrics_<tag>.csv` (per-image metrics), `summary_<tag>.json`, and for threshold analyses `sweep_val.csv` / `sweep_test.csv` (per-image confusion counts and stem traits for every stem-logit offset), `metrics_thr.csv`, `offset_val.csv`, and for the seed-0 LOIO runs `topo_test.csv` (stem connected components per image and offset). Loss-weight runs are in `<loss>_lam<λ>/` |
-| `analysis/` | Scripts and outputs: `main/` (paired tests, consistency, threshold control), `loio/` (H1–H5), `review/` (analyses added in review, including the Fig. 4 image selection `select_fig4.py` and the predicted masks in `review/fig4/`), `review2/` (Tversky control, matched-area topology and loss weight: manuscript Section 4.9, Tables 7–8, Supplementary Tables S21–S22) |
-| `figures/` | Figures and the scripts that generate them |
+| `analysis/` | Scripts and outputs: `main/` (paired tests, consistency, threshold control), `loio/` (H1–H5), `review/` (analyses added in review, including the Fig. 8 image selection `select_fig4.py` and the predicted masks in `review/fig4/`), `review2/` (Tversky control, matched-area topology and loss weight: manuscript Section 4.9, Table 6, Figs. 6–7, Supplementary Tables S21, S22 and S24) |
+| `figures/` | Figures and the scripts that generate them (see *Figure and table numbers* below) |
 
 Model weights and the GWFSS images are not included. All statistics in the paper can be recomputed from the per-image tables in `results/` without retraining.
 
@@ -35,15 +35,35 @@ python analysis/loio/loio_h1_h3.py
 python analysis/review/rev_block1.py
 python analysis/review2/rev_block6.py && python analysis/review2/rev_block6_tables.py
 python figures/scripts/fig3_loio_area_ratio.py .
+python figures/scripts/fig5_calibration.py .
 ```
 
 Per-image results: every `results/.../metrics_ss.csv` has one row per test image with class confusion counts (`inter_<class>`, `union_<class>`), stem traits and topology counts; dataset-level IoU is the sum of `inter_<class>` divided by the sum of `union_<class>` over images, and per-image IoU is the same ratio within a row. Paired per-image differences between losses are computed by joining the tables of two runs on `name` (see `src/gwfss_stem/analysis.py` and `analysis/main/`). Threshold calibration is recomputed offline from `sweep_val.csv` / `sweep_test.csv` (`analysis/loio/thresholds_e3.py`). Components are 8-connected; a predicted and a reference component are linked if they share a pixel (`engine.topo_counts`); the matched-area comparisons pair `topo_test.csv` with `sweep_test.csv` (`analysis/review2/rev_block6.py`).
 
-Fig. 4: `analysis/review/select_fig4.py` chooses the images from the per-image tables (rule fixed before any prediction was viewed); `notebooks/07_fig4_qualitative.ipynb` predicts them from the trained weights and checks that each prediction reproduces the stored per-image stem IoU (`analysis/review/fig4/fig4_check.csv`); `figures/scripts/fig4_qualitative.py .` draws the figure. The predicted masks are included; the RGB images and reference masks (`row<i>_rgb.png`, `row<i>_gt.png`) are written by the notebook from GWFSS and are not redistributed.
+Fig. 8: `analysis/review/select_fig4.py` chooses the images from the per-image tables (rule fixed before any prediction was viewed); `notebooks/07_fig4_qualitative.ipynb` predicts them from the trained weights and checks that each prediction reproduces the stored per-image stem IoU (`analysis/review/fig4/fig4_check.csv`); `figures/scripts/fig4_qualitative.py .` draws the figure. The predicted masks are included; the RGB images and reference masks (`row<i>_rgb.png`, `row<i>_gt.png`) are written by the notebook from GWFSS and are not redistributed.
 
 Scripts that read the reference masks (trait exclusions, stem width) expect the dataset converted with `gwfss_stem.data.prepare_dataset("data_cache/gw")`, which downloads the labelled parquet shards from the Hugging Face Hub.
 
 Hardware differed between experiments (Colab T4, A100 and RTX PRO 6000; see each `config.json`); within an experiment, all losses and seeds of an architecture share the same GPU type and number of workers.
+
+## Figure and table numbers
+
+Script and file names keep the numbers of earlier drafts. In the submitted manuscript:
+
+| Manuscript | Script (`figures/scripts/`) | Inputs |
+|---|---|---|
+| Fig. 1, study design | `fig1_study_design.py` | none |
+| Fig. 2, dataset overview | `fig2_dataset_overview.py` | `data_cache/gw` (see below); the chosen images are listed in `figures/fig2_dataset_overview_images.csv` |
+| Fig. 3, paired effects | `fig2_paired_effects.py` | `analysis/main/` |
+| Fig. 4, LOIO area ratio | `fig3_loio_area_ratio.py` | `analysis/loio/` |
+| Fig. 5, threshold calibration | `fig5_calibration.py` | `analysis/loio/e3_thresholds.csv`, `analysis/review/table12_cluster_bootstrap.csv` |
+| Fig. 6, matched-area topology | `fig6_topology.py` | `analysis/review2/topology_matched.csv` |
+| Fig. 7, loss weight | `fig7_loss_weight.py` | `analysis/review2/lambda_sensitivity.csv` |
+| Fig. 8, qualitative predictions | `fig4_qualitative.py` | `analysis/review/fig4/` |
+
+`fig1_examples.py` (GWFSS examples of modal stem annotation) belongs to an earlier draft and is kept for reference. Tables: the calibration table printed as "Table 5" by earlier drafts is Supplementary Table S23 (plotted in Fig. 5); the trait table is Table 5; the institution-cluster table printed as "Table 7" by `analysis/review2/rev_block6_tables.py` is Table 6; its "Table 8" (matched-area topology) is Supplementary Table S24 (plotted in Fig. 6). Each script is run from the repository root with `.` as its argument.
+
+Fig. 2 shows GWFSS images and annotations (CC BY 4.0, © the GWFSS authors).
 
 ## Licences
 

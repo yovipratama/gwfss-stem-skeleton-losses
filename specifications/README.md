@@ -16,7 +16,7 @@ The ordering of specification and runs can also be checked against the `started`
 - The season-stratified calibration (Supplementary Table S15) and the matched-area comparison (Supplementary Table S14) were added in review and are not part of these specifications; they are reported as exploratory and post hoc, respectively.
 - `03_spec…` refers to itself by its internal name (`06_spec…`) and to internal paths; the analysis is `analysis/review2/rev_block6.py`.
 - `03_spec…`, Block B: the Betti-0 error per offset (|n_pred − n_ref|) was computed as an additional descriptive measure; it is not used for the H7/H8 decisions.
-- `03_spec…`, Block A: institution-cluster bootstrap intervals for the mean change per loss (manuscript Table 7) were added as descriptive statistics.
+- `03_spec…`, Block A: institution-cluster bootstrap intervals for the mean change per loss (manuscript Table 6) were added as descriptive statistics.
 - `03_spec…`, Block C was run after the Block A/B results had been written up; the outputs follow the specification (stem precision and recall included in `analysis/review2/lambda_sensitivity.csv`). Block B results at offset 0 are reported in Supplementary Table S21.
 
 The pre-declared analysis of the main experiments (sub-questions SQ1–SQ4, primary outcomes and the consistency criterion) is described in the manuscript, Sections 1 and 3.9.
